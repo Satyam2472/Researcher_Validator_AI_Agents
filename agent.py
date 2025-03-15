@@ -24,7 +24,7 @@ class ResearcherAgent:
         try:
             model = genai.GenerativeModel("gemini-2.0-flash")  # ✅ Correct way to use Gemini
             response = model.generate_content(
-                f"Find the latest AI advancements in {self.query}. Provide a detailed and structured summary."
+                f"Find the latest research on {self.query}. Provide a detailed and structured summary."
             )
             return response.text if response else "No research data found."
         except Exception as e:
