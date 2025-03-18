@@ -1,17 +1,17 @@
 
 
 import streamlit as st
-import google.generativeai as genai  # ✅ Correct import
+import google.generativeai as genai
 import os
 
 # Initialize Gemini API Client
-API_KEY = st.secrets.get("GEMINI_API_KEY")  # Fetch API key from Streamlit secrets
+API_KEY = st.secrets.get("GEMINI_API_KEY")  
 
 if not API_KEY:
     st.error("⚠️ API key not found! Please add it to Streamlit secrets.")
-    st.stop()  # Stop execution if API key is missing
+    st.stop()  
 else:
-    genai.configure(api_key=API_KEY)  # ✅ Correct way to initialize
+    genai.configure(api_key=API_KEY)  
 
 class ResearcherAgent:
     """AI Agent responsible for researching and collecting data."""
@@ -22,9 +22,9 @@ class ResearcherAgent:
     def collect_data(self):
         """Uses Gemini AI to gather research data."""
         try:
-            model = genai.GenerativeModel("gemini-2.0-flash")  # ✅ Correct way to use Gemini
+            model = genai.GenerativeModel("gemini-2.0-flash")  
             response = model.generate_content(
-                f"Find the latest research on {self.query}. Provide a detailed and structured summary."
+                f"Find the latest research on {self.query}. Provide a detailed and structured summary. Also memtion the source of the information."
             )
             return response.text if response else "No research data found."
         except Exception as e:
@@ -39,7 +39,7 @@ class ValidatorAgent:
     def validate_and_refine(self):
         """Uses Gemini AI to validate and enhance research data."""
         try:
-            model = genai.GenerativeModel("gemini-2.0-flash")  # ✅ Correct way to use Gemini
+            model = genai.GenerativeModel("gemini-2.0-flash")  
             response = model.generate_content(
                 f"""
                 Validate and refine the following data:
@@ -53,6 +53,7 @@ class ValidatorAgent:
                 - If the query is about technology, refer to reputable sites like Wikipedia.org or arXiv.org.
                 - For general topics, use the latest, most trusted sources.
                 - Structure it in a readable and concise format.
+                - Make sure the source of information is reliable and trusted, if not then do a research from a reliable source and list them in the results.
 
                 Provide the final refined version.
                 """
