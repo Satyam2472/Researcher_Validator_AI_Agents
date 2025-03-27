@@ -54,7 +54,8 @@ class ValidatorAgent:
                 - For general topics, use the latest, most trusted sources.
                 - Structure it in a readable and concise format.
                 - Make sure the source of information is reliable and trusted, if not then do a research from a reliable source and list them in the results.
-
+                - List all the name and links of the resources used in the reseach and validation.
+                
                 Provide the final refined version.
                 """
             )
